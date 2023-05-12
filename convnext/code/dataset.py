@@ -263,6 +263,7 @@ class ImageFolder(data.Dataset):
             frames.append(frame)
         elif self.mode == 'submission':
             file_paths = []
+            video_path = 'code/'+video_path
             for root, dirs, files in os.walk(video_path):
                 for filename in files:
                     if filename.endswith(".png"):
