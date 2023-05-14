@@ -22,8 +22,7 @@ use_TTA = True
 def load_model(exp, id):
     # model_paths = ["/code/submit_weights/{}/ensemble.fp16.simplified.onnx".format(exp)
     # ]
-    model_paths = ["submit_weights/{}/ensemble.fp16.simplified.onnx".format(exp)
-    ]
+    model_paths = ["weights_v1/{}".format(exp)]
     models = []
     for model_path in model_paths:
         ort_sess = ort.InferenceSession(model_path, providers=['CUDAExecutionProvider'])
@@ -75,7 +74,7 @@ for image_size in image_size_list:
 
 def extract_worker(q):
     # video_directory = "/data"
-    video_directory = "/data/private_test/videos/"
+    video_directory = "private_test_2_frames/videos/"
     video_ids = []
     batch_size = 12
     for root, dirs, files in os.walk(video_directory):
@@ -143,18 +142,18 @@ if __name__ == '__main__':
     lock_4 = Lock()
 
     lock_1.acquire(); lock_2.acquire(); lock_3.acquire(); lock_4.acquire()
-    predict_1_process = Process(target=predict_worker, args=(q, d[0], 0, "exp_39", lock_1, ))
+    # predict_1_process = Process(target=predict_worker, args=(q, d[0], 0, "exp_39", lock_1, ))
     predict_2_process = Process(target=predict_worker, args=(q, d[1], 1, "exp_40", lock_2,))
-    predict_3_process = Process(target=predict_worker, args=(q, d[2], 2, "exp_43", lock_3,))
-    predict_4_process = Process(target=predict_worker, args=(q, d[3], 3, "exp_49", lock_4,))
+    # predict_3_process = Process(target=predict_worker, args=(q, d[2], 2, "exp_43", lock_3,))
+    # predict_4_process = Process(target=predict_worker, args=(q, d[3], 3, "exp_49", lock_4,))
     # predict_5_process = Process(target=predict_worker, args=(q, d[4], 4, "B5",))
     # results.append({})
 
     # Load model
-    predict_1_process.start()
+    # predict_1_process.start()
     predict_2_process.start()
-    predict_3_process.start()
-    predict_4_process.start()
+    # predict_3_process.start()
+    # predict_4_process.start()
     # predict_5_process.start()
     # Start run
     lock_1.acquire(); lock_2.acquire(); lock_3.acquire(); lock_4.acquire()
@@ -162,10 +161,10 @@ if __name__ == '__main__':
     lock_1.release(); lock_2.release(); lock_3.release(); lock_4.release()
     extract_process.start()
     extract_process.join()
-    predict_1_process.join()
+    # predict_1_process.join()
     predict_2_process.join()
-    predict_3_process.join()
-    predict_4_process.join()
+    # predict_3_process.join()
+    # predict_4_process.join()
     # predict_5_process.join()
     t2 = time.time()
     print("Total processing time (Include extract frames and preprocessing): {}s".format(t2 - t1))
