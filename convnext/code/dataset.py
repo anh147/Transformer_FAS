@@ -205,6 +205,8 @@ class ImageFolder(data.Dataset):
         frames = []
         if self.mode == 'train':
             file_paths = []
+            # D:/VDT2023/ProjectP1/Zalo-AI-Challenge-2022-Liveness-Detection/code
+            video_path = "D:/VDT2023/ProjectP1/Zalo-AI-Challenge-2022-Liveness-Detection/code/"+video_path
             for root, dirs, files in os.walk(video_path):
                 for filename in files:
                     if filename.endswith(".png"):
@@ -324,7 +326,7 @@ import torch
 import torch.utils.data as data
 from PIL import Image
 import albumentations as A
-from rand_augment import preprocess_input
+# from rand_augment import preprocess_input
 from torchvision.io import read_image
 from torch.utils.data import Sampler,RandomSampler,SequentialSampler
 import random

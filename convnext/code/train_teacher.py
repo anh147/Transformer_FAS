@@ -350,7 +350,7 @@ if __name__ == '__main__':
     print(default_configs)
 
     seed_torch()
-    DATA_PATH = "code/train"
+    DATA_PATH = "code/train_resize"
     avg_score = {"loss": 0, "acc": 0, "roc_auc": 0, "eer": 0}
     n_fold = 5
     
