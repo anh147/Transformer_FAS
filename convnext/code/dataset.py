@@ -205,8 +205,6 @@ class ImageFolder(data.Dataset):
         frames = []
         if self.mode == 'train':
             file_paths = []
-            # D:/VDT2023/ProjectP1/Zalo-AI-Challenge-2022-Liveness-Detection/code
-            video_path = "D:/VDT2023/ProjectP1/Zalo-AI-Challenge-2022-Liveness-Detection/code/"+video_path
             for root, dirs, files in os.walk(video_path):
                 for filename in files:
                     if filename.endswith(".png"):
@@ -264,6 +262,7 @@ class ImageFolder(data.Dataset):
             frames.append(frame)
         elif self.mode == 'submission':
             file_paths = []
+            video_path = 'code/'+video_path
             for root, dirs, files in os.walk(video_path):
                 for filename in files:
                     if filename.endswith(".png"):
